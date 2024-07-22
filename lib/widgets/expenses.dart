@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -34,7 +35,7 @@ class _ExpensesState extends State<Expenses> {
     // ctx is the context of the modal bottom sheet
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const Text('This is the overlay'),
+      builder: (ctx) => const NewExpense(),
     );
   }
 
