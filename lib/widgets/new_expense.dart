@@ -38,6 +38,31 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(
+        _amountController.text); // if is not a number, it will return null
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if (_amountController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      showDialog(context: context, builder: (ctx) => AlertDialog(
+        title: const Text('Invalid input'),
+        content: const Text('Please enter a valid title, amount and date'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+            },
+            child: const Text('Ok'),
+          ),
+        ],
+      ));
+      return;
+    } // if the amount is not a number or is less than or equal to 0, we will return
+
+    
+  }
+
   @override
   void dispose() {
     // needed to avoid memory leaks with controllers
@@ -93,7 +118,8 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ],
           ),
-          const SizedBox( // needed to add some space between the two rows
+          const SizedBox(
+            // needed to add some space between the two rows
             height: 16,
           ),
           Row(
@@ -117,7 +143,7 @@ class _NewExpenseState extends State<NewExpense> {
                       _selectedCategory = value;
                     });
                   }),
-                  const Spacer(),
+              const Spacer(),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -125,11 +151,7 @@ class _NewExpenseState extends State<NewExpense> {
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  // debug
-                  print(_titleController.text);
-                  print(_amountController.text);
-                },
+                onPressed: _submitExpenseData,
                 child: const Text('Save expense'),
               ),
             ],
