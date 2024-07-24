@@ -15,14 +15,20 @@ class ExpenseItem extends StatelessWidget {
           vertical: 16,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expense.title),
+            Text(
+              expense.title,
+              style: Theme.of(context).textTheme.titleLarge, 
+              // theme.of(context) let us access the theme metedata in the context parameter
+            ),
             const SizedBox(height: 4),
             Row(
               children: [
                 Text('${expense.amount.toStringAsFixed(2)}€'),
                 const Spacer(), // takes all available space
-                Row( // row inside a rowto group the icon and the text
+                Row(
+                  // row inside a rowto group the icon and the text
                   children: [
                     Icon(categoryIcons[expense.category]),
                     const SizedBox(width: 8),
