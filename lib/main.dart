@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 
 import 'package:expense_tracker/widgets/expenses.dart';
 
@@ -14,53 +15,59 @@ var kDarkColorSckeme = ColorScheme.fromSeed(
 );
 
 void main() {
-  runApp(
-    MaterialApp(
-      darkTheme: ThemeData.dark().copyWith(
-        colorScheme: kDarkColorSckeme,
-        cardTheme: const CardTheme().copyWith(
-          color: kDarkColorSckeme.secondaryContainer,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
+  // lock the orientation to portrait
+  /*WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((fn) {*/
+    runApp(
+      MaterialApp(
+        darkTheme: ThemeData.dark().copyWith(
+          colorScheme: kDarkColorSckeme,
+          cardTheme: const CardTheme().copyWith(
+            color: kDarkColorSckeme.secondaryContainer,
+            margin: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: kDarkColorSckeme.primaryContainer,
+              foregroundColor: kDarkColorSckeme.onPrimaryContainer,
+            ),
           ),
         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: kDarkColorSckeme.primaryContainer,
-            foregroundColor: kDarkColorSckeme.onPrimaryContainer,
+        theme: ThemeData().copyWith(
+          // copyWith lets you create a new ThemeData changing only the properties you want
+          colorScheme: kColorScheme,
+          appBarTheme: const AppBarTheme().copyWith(
+            backgroundColor: kColorScheme.onPrimaryContainer,
+            foregroundColor: kColorScheme.primaryContainer,
           ),
+          cardTheme: const CardTheme().copyWith(
+            color: kColorScheme.secondaryContainer,
+            margin: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: kColorScheme.primaryContainer,
+            ),
+          ),
+          textTheme: ThemeData().textTheme.copyWith(
+                titleLarge: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: kColorScheme.onSecondaryContainer,
+                ),
+              ),
         ),
+        themeMode: ThemeMode.system,
+        home: const Expenses(),
       ),
-      theme: ThemeData().copyWith(
-        // copyWith lets you create a new ThemeData changing only the properties you want
-        colorScheme: kColorScheme,
-        appBarTheme: const AppBarTheme().copyWith(
-          backgroundColor: kColorScheme.onPrimaryContainer,
-          foregroundColor: kColorScheme.primaryContainer,
-        ),
-        cardTheme: const CardTheme().copyWith(
-          color: kColorScheme.secondaryContainer,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: kColorScheme.primaryContainer,
-          ),
-        ),
-        textTheme: ThemeData().textTheme.copyWith(
-          titleLarge: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: kColorScheme.onSecondaryContainer,
-          ),
-        ),
-      ),
-      themeMode: ThemeMode.system,
-      home: const Expenses(),
-    ),
-  );
+    );
+  //}); lock the orientation to portrait END
 }
