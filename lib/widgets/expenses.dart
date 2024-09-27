@@ -35,6 +35,7 @@ class _ExpensesState extends State<Expenses> {
     // context contains metadata about the widget and its location in the widget tree
     // ctx is the context of the modal bottom sheet
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),
